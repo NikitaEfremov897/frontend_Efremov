@@ -1,0 +1,311 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Container */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header */
+header {
+    background-color: #fff;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+header .logo {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+header nav {
+    display: flex; 
+}
+
+header nav a {
+    margin-left: 20px; 
+    color: #333;
+    text-decoration: none;
+    padding: 10px 20px; 
+    border-radius: 5px; 
+    display: flex; 
+    align-items: center; 
+}
+
+/* Стили для кнопки "For Recruiters" */
+
+header nav a:hover {
+    color: #3D1EDD;
+}
+
+/* Стили для кнопок */
+header nav .sign-up {
+    background-color: #3D1EDD; 
+    color: #fff; 
+}
+
+header nav .log-in {
+    background-color: #fff; 
+    color: #3D1EDD; 
+    border: 2px solid #3D1EDD;
+}
+
+header nav .log-in:hover {
+    background-color: #3D1EDD;
+    color: #fff; 
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+.buttonjoin{
+    background-color: #3D1EDD;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom:10px;
+}
+.buttonjoin:hover{
+    background-color: #3D1EDD;
+}
+.hero-image {
+    width:50%;
+    height: 900px
+    margin-top: 40px;
+}
+
+/*Vrote Section */
+
+.bloktem {
+    position: relative; 
+    height: 600px; 
+    background-color: black; 
+    overflow: hidden; 
+}
+.bloktem::before{
+    content: "";
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    width: 100%;
+    height: 150%;
+    background:linear-gradient(to top, black 50%, white 50%); 
+}
+
+.hero-image {
+    position: absolute; 
+    top: 40%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    max-width: none; 
+    width: 60%; 
+    height: 100%; 
+}
+
+/* Quote Section */
+.quote {
+    background-color: #f1f1f1;
+    padding: 40px 0;
+    text-align: center;
+}
+.quote blockquote {
+    font-style: italic;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+.images{
+    align-items: center;
+    margin-top: 50px;
+}
+.img_dop1{
+    width: 70px;
+    margin-left: -300px;
+
+}
+.img_dop2{
+    width: 70px;
+    margin-left: 210px;
+}
+
+/* Info Section */
+.info {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.info h2 {
+    margin-bottom: 20px;
+}
+
+.info-image {
+    width: 100%;
+
+    margin: 30px auto;
+}
+
+.features {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
+.feature {
+    width: 30%;
+    text-align: left;
+}
+
+/* Connect Section */
+.connect {
+    margin-top: 40px;
+    margin-bottom: 40px; 
+}
+
+.connect .container {
+    display: flex; 
+    align-items: center; 
+}
+
+.connect-image {
+    max-width: 100%; 
+    height: auto; 
+    margin-right: 10%; 
+}
+.connect-text {
+    max-width: 600px; 
+}
+.connect-text h1 {
+    font-size: 24px; 
+    margin-bottom: 10px; 
+}
+.connect-text p {
+    font-size: 18px; 
+}
+
+/* CTA Section */
+.cta {
+    background-color: #000; 
+    color: #fff; 
+    padding: 60px 0; 
+    margin-top: 40px;
+}
+
+.cta .container {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+}
+
+.text-container {
+    max-width: 400px; 
+}
+
+.cta h1 {
+    font-size: 40px; 
+    margin-bottom: 10px; 
+}
+
+.cta-button {
+    background-color: #3D1EDD; 
+    color: #fff; 
+    padding: 10px 20px; 
+    border: none; 
+    cursor: pointer; 
+    margin-top: 20px; 
+}
+
+.cta-button:hover {
+    background-color: #3D1EDD; 
+}
+
+.cta-image {
+    max-width: 100%; 
+    height: auto; 
+}
+
+/* Footer */
+.footer {
+    background-color: #fff;
+    color: #333; 
+    padding: 20px 0; 
+}
+
+.footer__right{
+    padding-left: 18%;
+}
+.footer__text {
+    text-align: left; 
+    font-weight: bold; 
+    margin: 20px 0; 
+    line-height: 1.5; 
+}
+
+.footer__text:nth-child(2) {
+    font-size: 14px; 
+    color: #aaa;
+}
+
+.footer__links {
+    text-align: right; 
+    margin-top: 10px; 
+}
+
+.footer__link {
+    color: #333; 
+    text-decoration: none; 
+    font-weight: bold; 
+}
+
+.footer__link:hover {
+    color: #aaa; 
+}
+.footer {
+    background-color: #f8f8f8; 
+    padding: 20px; 
+}
+
+.foot_all {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+.foot_left {
+    margin-top: 5%;
+    margin-right: 17%
+}
+
+.footer__right {
+    text-align: right; 
+}
