@@ -407,7 +407,6 @@ header nav .log-in:hover {
     outline: none;
     box-shadow: 0 0 0 2px rgba(61, 30, 221, 0.2);
 }
-
 .modal-content button {
     background-color: #3D1EDD;
     color: white;
@@ -420,7 +419,6 @@ header nav .log-in:hover {
     margin-top: 10px;
     transition: background-color 0.3s;
 }
-
 .modal-content button:hover {
     background-color: #2b13b3;
 }
