@@ -3,6 +3,15 @@ window.addEventListener('DOMContentLoaded', function() {
   initModals();
   initSlider();
 });
+document.addEventListener('DOMContentLoaded', () => {
+  const preloader = document.querySelector('.preloader');
+  setTimeout(() => {
+    preloader.style.opacity = '0';
+    setTimeout(() => {
+      preloader.style.display = 'none';
+    }, 500); 
+  }, 1000); 
+});
 function initPreloader() {
   const preloader = document.getElementById('preloader');
   window.addEventListener('load', function() {
