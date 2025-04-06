@@ -1,11 +1,8 @@
-// ==================== Main Initialization ====================
 window.addEventListener('DOMContentLoaded', function() {
   initPreloader();
   initModals();
   initSlider();
 });
-
-// ==================== Preloader ====================
 function initPreloader() {
   const preloader = document.getElementById('preloader');
   window.addEventListener('load', function() {
@@ -15,8 +12,6 @@ function initPreloader() {
     }, 500);
   });
 }
-
-// ==================== Modals ====================
 function initModals() {
   const modals = {
     signup: {
@@ -30,8 +25,6 @@ function initModals() {
       closeBtn: document.getElementById('closeLoginModal')
     }
   };
-
-  // Open/close modals
   function setupModal(modal, openBtn, closeBtn) {
     openBtn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -46,12 +39,9 @@ function initModals() {
       if (e.target === modal) modal.style.display = 'none';
     });
   }
-
-  // Setup each modal
   setupModal(modals.signup.modal, modals.signup.openBtn, modals.signup.closeBtn);
   setupModal(modals.login.modal, modals.login.openBtn, modals.login.closeBtn);
 
-  // Form submissions
   document.getElementById('signupForm').addEventListener('submit', (e) => {
     e.preventDefault();
     alert('Registration successful!');
@@ -65,7 +55,6 @@ function initModals() {
   });
 }
 
-// ==================== Slider ====================
 function initSlider() {
   const slides = document.querySelectorAll('.hero-image');
   let currentSlide = 0;
