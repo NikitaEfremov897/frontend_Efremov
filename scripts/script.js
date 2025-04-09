@@ -77,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 500); 
   }, 1000); 
 });
+
 function initPreloader() {
   const preloader = document.getElementById('preloader');
   window.addEventListener('load', function() {
