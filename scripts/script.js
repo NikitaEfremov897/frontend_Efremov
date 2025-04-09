@@ -1,3 +1,68 @@
+const cards = {
+  card_1: {
+    title: "Professional Profile",
+    description: "We know finding the right job is stressful, so we've made it simple...",
+  },
+  card_2: {
+    title: "Best Portfolio",
+    description: "Showcase your work and stand out from the crowd...",
+  },
+  card_3: {
+    title: "Powerful Resume",
+    description: "Create a resume that gets noticed by recruiters...",
+  }
+};
+
+function getCards() {
+  return Object.values(cards); 
+}
+
+function createCardTemplate(card) {
+  return `
+    <div class="feature-card" role="button" tabindex="0">
+      <hr>
+      <h3>${card.title}</h3>
+      <p>${card.description}</p>
+    </div>
+  `;
+}
+
+function renderCards(containerSelector, cards) {
+  const container = document.querySelector(containerSelector);
+
+  if (!container) {
+    console.error(`Container with selector "${containerSelector}" not found.`);
+    return;
+  }
+
+  const cardsHTML = cards.map(createCardTemplate).join(""); 
+  container.innerHTML = cardsHTML; 
+
+  
+  const renderedCards = container.querySelectorAll('.feature-card');
+
+  renderedCards.forEach((card, index) => {
+    card.addEventListener('click', () => {
+      updateHeaderText(cards[index].description); 
+    });
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        updateHeaderText(cards[index].description);
+      }
+    });
+  });
+}
+
+function updateHeaderText(newText) {
+  const header = document.querySelector('.info h1');
+  if (header) {
+    header.textContent = newText;
+  }
+}
+document.addEventListener("DOMContentLoaded", () => {
+  const cardData = getCards(); 
+  renderCards(".features", cardData); 
+});
 window.addEventListener('DOMContentLoaded', function() {
   initPreloader();
   initModals();
