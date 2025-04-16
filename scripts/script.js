@@ -1,25 +1,43 @@
-const cards = {
-  card_1: {
-    title: "Professional Profile",
-    description: "We know finding the right job is stressful, so we've made it simple...",
-  },
-  card_2: {
-    title: "Best Portfolio",
-    description: "Showcase your work and stand out from the crowd...",
-  },
-  card_3: {
-    title: "Powerful Resume",
-    description: "Create a resume that gets noticed by recruiters...",
+async function getCards() {
+  try {
+    const response = await fetch('https://jsonplaceholder.typicode.com/comments?_limit=3');
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const comments = await response.json();
+  
+    return comments.map(comment => ({
+      title: `Comment from ${comment.email}`,
+      description: comment.body,
+      id: comment.id
+    }));
+    
+  } catch (error) {
+    console.error('Error fetching cards:', error);
+    
+    return [
+      {
+        title: "Professional Profile",
+        description: "We know finding the right job is stressful, so we've made it simple...",
+        id: 1
+      },
+      {
+        title: "Best Portfolio",
+        description: "Showcase your work and stand out from the crowd...",
+        id: 2
+      },
+      {
+        title: "Powerful Resume",
+        description: "Create a resume that gets noticed by recruiters...",
+        id: 3
+      }
+    ];
   }
-};
-
-function getCards() {
-  return Object.values(cards); 
 }
 
 function createCardTemplate(card) {
   return `
-    <div class="feature-card" role="button" tabindex="0">
+    <div class="feature-card" role="button" tabindex="0" data-id="${card.id}">
       <hr>
       <h3>${card.title}</h3>
       <p>${card.description}</p>
@@ -38,7 +56,6 @@ function renderCards(containerSelector, cards) {
   const cardsHTML = cards.map(createCardTemplate).join(""); 
   container.innerHTML = cardsHTML; 
 
-  
   const renderedCards = container.querySelectorAll('.feature-card');
 
   renderedCards.forEach((card, index) => {
@@ -59,27 +76,11 @@ function updateHeaderText(newText) {
     header.textContent = newText;
   }
 }
-document.addEventListener("DOMContentLoaded", () => {
-  const cardData = getCards(); 
-  renderCards(".features", cardData); 
-});
-window.addEventListener('DOMContentLoaded', function() {
-  initPreloader();
-  initModals();
-  initSlider();
-});
-document.addEventListener('DOMContentLoaded', () => {
-  const preloader = document.querySelector('.preloader');
-  setTimeout(() => {
-    preloader.style.opacity = '0';
-    setTimeout(() => {
-      preloader.style.display = 'none';
-    }, 500); 
-  }, 1000); 
-});
 
 function initPreloader() {
   const preloader = document.getElementById('preloader');
+  if (!preloader) return;
+
   window.addEventListener('load', function() {
     preloader.style.opacity = '0';
     setTimeout(() => {
@@ -87,6 +88,7 @@ function initPreloader() {
     }, 500);
   });
 }
+
 function initModals() {
   const modals = {
     signup: {
@@ -100,7 +102,10 @@ function initModals() {
       closeBtn: document.getElementById('closeLoginModal')
     }
   };
+  
   function setupModal(modal, openBtn, closeBtn) {
+    if (!modal || !openBtn || !closeBtn) return;
+
     openBtn.addEventListener('click', (e) => {
       e.preventDefault();
       modal.style.display = 'block';
@@ -114,24 +119,33 @@ function initModals() {
       if (e.target === modal) modal.style.display = 'none';
     });
   }
+  
   setupModal(modals.signup.modal, modals.signup.openBtn, modals.signup.closeBtn);
   setupModal(modals.login.modal, modals.login.openBtn, modals.login.closeBtn);
 
-  document.getElementById('signupForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    alert('Registration successful!');
-    modals.signup.modal.style.display = 'none';
-  });
+  const signupForm = document.getElementById('signupForm');
+  if (signupForm) {
+    signupForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Registration successful!');
+      modals.signup.modal.style.display = 'none';
+    });
+  }
 
-  document.getElementById('loginForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    alert('Login successful!');
-    modals.login.modal.style.display = 'none';
-  });
+  const loginForm = document.getElementById('loginForm');
+  if (loginForm) {
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Login successful!');
+      modals.login.modal.style.display = 'none';
+    });
+  }
 }
 
 function initSlider() {
   const slides = document.querySelectorAll('.hero-image');
+  if (slides.length === 0) return;
+  
   let currentSlide = 0;
   
   function showSlide() {
@@ -140,10 +154,45 @@ function initSlider() {
     });
   }
 
-  setInterval(() => {
+  const slideInterval = setInterval(() => {
     currentSlide = (currentSlide + 1) % slides.length;
     showSlide();
   }, 3000);
 
   showSlide();
+  
+  
+  return () => clearInterval(slideInterval);
 }
+
+
+async function initializeApp() {
+  const preloader = document.querySelector('.preloader');
+  if (preloader) {
+    preloader.style.display = 'flex';
+    preloader.style.opacity = '1';
+  }
+
+  try {
+    const cardData = await getCards();
+    renderCards(".features", cardData);
+  
+    initPreloader();
+    initModals();
+    initSlider();
+  } catch (error) {
+    console.error("Error initializing app:", error);
+  } finally {
+    
+    setTimeout(() => {
+      if (preloader) {
+        preloader.style.opacity = '0';
+        setTimeout(() => {
+          preloader.style.display = 'none';
+        }, 500);
+      }
+    }, 1000);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", initializeApp);
